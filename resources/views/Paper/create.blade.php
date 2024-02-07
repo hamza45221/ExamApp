@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row justify-content-center align-items-center" style="height: 600px;">
             <div class="col-6">
-                <div class="card">
+                <div class="card shadow-lg rounded-3">
                     <div class="card-header">
                         <h4>Write Your Paper name</h4>
                     </div>
@@ -19,7 +19,7 @@
                                 @endforeach
                             </select>
                             <label>Select User</label>
-                            <select class="form-control my-4" name="User_id" multiple>
+                            <select class="form-control my-4" name="User_id[]" multiple>
                                 @foreach($user as $users )
                                     <option value="{{$users->id}}">{{$users->name}}</option>
                                 @endforeach

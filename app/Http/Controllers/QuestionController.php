@@ -2,42 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Paper;
 use App\Models\Question;
+use App\Models\Paper;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    public function create(){
-        $paper = Paper::all();
-        return view('Question.create',compact('paper'));
+    public function create()
+    {
+        $subjects = Subject::pluck('name', 'id');
+        $papers = Paper::pluck('name','id');
+        return view('Question.create', compact('subjects', 'papers'));
     }
 
-    public function store(Request $request)
+    public function storeQuestion(Request $request)
     {
-        $paper_id = $request->paper_id;
+
+        $request->validate([
+            'subject_id' => 'required|exists:subjects,id',
+            'paper_id' => 'required|exists:papers,id',
+            'questions' => 'required|array',
+            'questions.*.content' => 'required|string',
+            'questions.*.type' => 'required|in:short,long,mcq',
+            'questions.*.options' => 'array|required_if:questions.*.type,mcq',
+        ]);
+        $paper = Paper::find($request->input('paper_id'));
 
         foreach ($request->input('questions') as $questionData) {
-            $question = new Question();
-            $question->paper_id = $paper_id;
-            $question->question = $questionData['question'] ?? null;
-            $question->type = $questionData['type'];
+            $question = new Question([
+                'question' => $questionData['content'], // change to 'questions'
+                'type' => $questionData['type'],
+            ]);
 
-            if ($questionData['type'] === 'MCQs') {
-                $mcqOptions = [
-                    'mcqs_options1' => $questionData['mcqs_options1'] ?? [],
-                    'mcqs_options2' => $questionData['mcqs_options2'] ?? [],
-                    'mcqs_options3' => $questionData['mcqs_options3'] ?? [],
-                    'mcqs_options4' => $questionData['mcqs_options4'] ?? [],
-                ];
-
-                // Convert MCQ options to JSON
-                $question->mcqs_options = json_encode($mcqOptions);
+            if ($questionData['type'] === 'mcq' && isset($questionData['options'])) {
+                $question->mcqs_options = json_encode($questionData['options']);
             }
 
+            $question->paper_id = $paper->id;
+//            dd($request->all());
             $question->save();
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Questions added successfully');
     }
+
+
 }

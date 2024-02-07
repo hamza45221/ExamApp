@@ -13,6 +13,11 @@ class SubjectController extends Controller
         return view('Subject.create',compact('department'));
     }
     public function store(Request $request){
+
+        $request->validate([
+            'name'=>'required|string',
+        ]);
+
         $subject = new Subject();
         $subject->name = $request->name;
         $subject->department_id = $request->department_id;

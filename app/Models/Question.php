@@ -8,15 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'paper_id',
-        'question',
-        'type',
-        'mcqs_options1',
-        'mcqs_options2',
-        'mcqs_options3',
-        'mcqs_options4',
+    protected $casts = [
+        'type' => 'string',
     ];
+
+    // Question.php
+
+//    protected $fillable = ['question', 'type', 'answer', 'correct_answer', 'paper_id'];
+
 
     public function getMcqsOptionsAttribute()
     {
@@ -28,7 +27,23 @@ class Question extends Model
         ];
     }
 
-    public function user(){
-        return $this->belongsTo(Paper::class,Question::class,'paper_id','question_id');
+    // In the Question model
+    protected $fillable = ['question', 'type', 'mcqs_options', 'paper_id'];
+
+    public function paper()
+    {
+        return $this->belongsTo(Paper::class);
     }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id');
+    }
+
+
 }

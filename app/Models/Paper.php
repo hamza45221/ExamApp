@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Paper extends Model
 {
     use HasFactory;
-
+    protected $fillable =['name'];
     public function subject(){
         return $this->belongsTo(Subject::class,'subject_id');
     }
@@ -16,10 +16,11 @@ class Paper extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'paper_student', 'paper_id', 'student_id');
+        return $this->belongsToMany(User::class, 'user_paper', 'paper_id', 'user_id');
     }
 
-    public function question(){
-        return $this->hasMany(Question::class,'question_id');
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
     }
 }

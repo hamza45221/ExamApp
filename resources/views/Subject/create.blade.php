@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row justify-content-center align-items-center" style="height: 600px;">
             <div class="col-6">
-                <div class="card">
+                <div class="card shadow-lg rounded-3">
                     <div class="card-header">
                         <h4>Write Your Subject name</h4>
                     </div>
@@ -20,6 +20,9 @@
                                 </select>
                                 <label>Type your Subject Name</label>
                             <input type="text" name="name" class="form-control" >
+                            @error('name')
+                                <div class="invalid-feedback d-block">{{$message}}</div>
+                            @enderror()
                             <input type="submit" class="form-control bg-success text-light my-4"/>
                         </form>
                     </div>

@@ -9,10 +9,18 @@ class Subject extends Model
 {
     use HasFactory;
 
-    public function department(){
-        return $this->belongsTo(Department::class,'department_id');
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
     }
-    public function paper(){
-        return $this->hasMany(Paper::class,'paper_id');
+
+    public function papers()
+    {
+        return $this->hasMany(Paper::class);
+    }
+
+    public function questions()
+    {
+        return $this->hasManyThrough(Question::class, Paper::class);
     }
 }

@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('questions', function (Blueprint $table) {
+
             $table->id();
             $table->foreignId('paper_id')->nullable();
             $table->string('question')->nullable();
-            $table->enum('type', ['long', 'short', 'MCQs'])->nullable();
-
+            $table->enum('type', ['long', 'short', 'mcq'])->nullable();
             $table->json('mcqs_options')->nullable();
 
             $table->timestamps();

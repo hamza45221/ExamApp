@@ -6,7 +6,7 @@
         <div class="row justify-content-center align-items-center" style="height: 600px;">
             <div class="col-6">
                 <div class="card shadow-lg rounded-3">
-                    <div class="card-header">
+                    <div class=" px-3 py-3">
                         <h4>Write Your Subject name</h4>
                     </div>
                     <div class="card-body">

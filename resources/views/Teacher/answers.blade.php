@@ -38,7 +38,7 @@
             <div class="col-md-8">
                 @forelse($papers as $paper)
                     @if($loop->first || $paper->user_id !== $papers[$loop->index - 1]->user_id)
-                        <div class="card mb-3">
+                        <div class="card mb-3 shadow-lg text-light bg-secondary">
                             <div class="card-body">
                                 <h2 align="right" class="card-title">{{ $paper->user->name }}</h2>
                                 <h5 align="right" class="card-text">

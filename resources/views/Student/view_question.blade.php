@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <h2 class="my-3">View Questions</h2>
-        <h5 class="bg-warning d-block py-2 px-2 rounded-2">Department: {{ $department->department_name }}</h5>
-        <h5 class="bg-warning d-block py-2 px-2 rounded-2" >Subject: {{ $subject->name }}</h5>
+        <h5 class="bg-warning shadow d-block py-2 px-2 rounded-2">Department: {{ $department->department_name }}</h5>
+        <h5 class="bg-warning shadow d-block py-2 px-2 rounded-2" >Subject: {{ $subject->name }}</h5>
 
         @if($subject->questions->count() > 0)
             <form action="{{ route('answers.store') }}" method="post">
@@ -13,7 +13,7 @@
                 <input type="hidden" name="subject_id" value="{{ $subject->id }}">
 
                 @foreach($subject->questions as $question)
-                    <div class="card my-4 ">
+                    <div class="card my-4 shadow ">
                         <div class="px-3 py-3">
                             <h3 class="mb-0">Q # : {{ $question->question }}</h3>
                         </div>

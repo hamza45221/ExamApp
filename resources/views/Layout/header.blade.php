@@ -11,7 +11,25 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
-
+<style>
+    ul {
+        padding: 0px;
+        margin: 0px;
+        list-style: none;
+    }
+</style>
 </head>
 <body>
+    <nav class="nav bg-body-tertiary shadow-lg px-5 py-4">
+        <div class="container-fluid d-flex justify-content-between align-items-center ">
+            <div class="nav-logo">
+                <h1>Shadules</h1>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="{{route('teacher.logout')}}" class="btn btn-outline-danger">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 

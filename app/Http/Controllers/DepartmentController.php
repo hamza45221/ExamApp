@@ -23,4 +23,8 @@ class DepartmentController extends Controller
         $department->save();
         return redirect(route('create.subject'));
     }
+    public function view (){
+        $department = Department::all();
+        return view('Department.view',compact('department'));
+    }
 }
